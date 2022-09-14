@@ -1,0 +1,5 @@
+{
+    "AWS_REGION": "us-west-2",
+    "S3_BUCKET_NAME": "posts-bucket",
+    "databaseConString": "mongodb:/127.0.0.1:27017/insta_db_local"
+}
