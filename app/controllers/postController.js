@@ -4,7 +4,7 @@ const { S3_BUCKET_NAME: bucketName } = require('config');
 
 
 const createPost = async (data, file) => {
-    console.log('Create Post Data');
+    console.log('CreatePost Data Controller...');
     const fileS3Details = await uploadFile(file);
     console.log('post created', fileS3Details);
     const createdPost = await Posts.create({...data, objectKey: file.filename, s3Bucket: bucketName});
