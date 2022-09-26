@@ -1,6 +1,5 @@
 const { S3Client } = require("@aws-sdk/client-s3");
-const { AWS_REGION: region } = require('config');
-const { localstackHost } = require('../../consts/uri');
+const { AWS_REGION: region, LOCALSTACK_HOST } = require('config');
 
 const accessKeyId = process.env.AWS_ACCESS_KEY;
 const secretAccessKey = process.env.AWS_SECRET_KEY;
@@ -12,7 +11,7 @@ const localCredentials = {
 
 const localConfig = {
     credentials: localCredentials,
-    endpoint: localstackHost,
+    endpoint: LOCALSTACK_HOST,
     forcePathStyle: true
 };
 

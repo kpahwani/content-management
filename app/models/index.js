@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const { databaseConString } = require('config');
+const config = require('config');
 
 const server = '127.0.0.1:27017';
 const database = 'insta_db_local';
 
-const DB_CON_STRING = databaseConString || `mongodb://${server}/${database}`;
+const DB_CON_STRING = config.get('DB_CON_STRING') || `mongodb://${server}/${database}`;
 
 class Database {
   constructor() {
