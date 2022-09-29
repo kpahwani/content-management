@@ -1,5 +1,6 @@
 const express = require('express');
 const postRoutes = require('./posts');
+const logger = require('../helpers/logger');
 
 module.exports = function(app) {
     const router = express.Router();
@@ -18,7 +19,7 @@ module.exports = function(app) {
     * @param next
     */
     function errorHandler(error, req, res, next) {
-        console.log(`Error in content-service`, { error });
+        logger.info(`Error in content-service`, { error });
         const { statusCode } = error;
         return res.status(statusCode).send(error);
     }

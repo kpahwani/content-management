@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const logger = require('../helpers/logger');
 const config = require('config');
 
 const server = '127.0.0.1:27017';
@@ -14,10 +15,10 @@ class Database {
 _connect() {
      mongoose.connect(DB_CON_STRING)
        .then(() => {
-         console.log('Database connection successful')
+        logger.info('Database connection successful');
        })
        .catch(err => {
-         console.error('Database connection error')
+        logger.error('Database connection error', err);
        })
   }
 }
