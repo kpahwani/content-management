@@ -4,5 +4,6 @@
     "DB_CON_STRING": "mongodb://127.0.0.1:27017/insta_db_local",
     "LOCALSTACK_HOST": "http://localhost:4566",
     "LOG_LEVEL": "info",
-    "LOGFILE_NAME": "combined.log"
+    "LOGFILE_NAME": "combined.log",
+    "FEED_SERVICE_SQS_URL": "http://localhost:4566/000000000000/feed-service-sqs"
 }
