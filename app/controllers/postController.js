@@ -1,6 +1,6 @@
 const Posts = require('../models/posts');
 const logger = require('../helpers/logger');
-const { CREATE_POST } = require('../consts/events');
+const { CREATE_POST, DELETE_POST } = require('../consts/events');
 const { push } = require('../events/sqs');
 const { uploadFile, deleteFile } = require('../helpers/aws/uploader');
 const dbHelper = require('../helpers/dbHelper/posts');
@@ -14,7 +14,7 @@ const createPost = async (data, file) => {
     const createdPost = await Posts.create({...data, objectKey: file.filename, s3Bucket: bucketName});
     const feedServiceSqsPayload = {
         postId: createdPost._id
-    }
+    };
     const sqsResponse = await push(CREATE_POST, feedServiceSqsPayload);
     logger.info('Post created: sqs message sent to feed service', sqsResponse);
     return {
@@ -37,6 +37,11 @@ const deletePost = async (postId) => {
     const deletedFile = await deleteFile(postDetails.objectKey);
     logger.info('post deleted', deletedFile);
     const deletedPost = await dbHelper.deletePost(postId)
+    const feedServiceSqsPayload = {
+        postId
+    };
+    const sqsResponse = await push(DELETE_POST, feedServiceSqsPayload);
+    logger.info('Post deleted: sqs message sent to feed service', sqsResponse);
     return {
         msg: 'post deleted',
         data: deletedPost
