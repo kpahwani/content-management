@@ -12,4 +12,31 @@ postRoutes.post('/post', upload.single('mediaFile'), asyncRouteHandler(async (re
     res.send(createdPost);
 }));
 
+
+postRoutes.get('/post/:postId', asyncRouteHandler(async (req, res) => {
+    const postId = req.params.postId;
+    const postData = await postController.getPost(postId);
+    res.send({
+        status: 'success',
+        data: postData
+    });
+}));
+
+
+postRoutes.get('/posts/:userId', asyncRouteHandler(async (req, res) => {
+    const userId = req.params.userId;
+    const posts = await postController.getPosts(userId);
+    res.send({
+        status: 'success',
+        data: posts
+    });
+}));
+
+
+postRoutes.delete('/post/:postId', asyncRouteHandler(async (req, res) => {
+    const postId = req.params.postId;
+    const deletedPost = await postController.deletePost(postId);
+    res.send(deletedPost);
+}));
+
 module.exports = postRoutes;

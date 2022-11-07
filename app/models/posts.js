@@ -35,7 +35,6 @@ let postsSchema = new mongoose.Schema({
   },
   deletedAt: {
     type: String,
-    required: true,
     default: null
   }
 });
